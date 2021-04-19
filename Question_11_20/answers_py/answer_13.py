@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 
+
 # Gray scale
 
 
@@ -14,6 +15,7 @@ def BGR2GRAY(img):
     out = out.astype(np.uint8)
 
     return out
+
 
 # max-min filter
 
@@ -31,7 +33,7 @@ def max_min_filter(img, K_size=3):
     for y in range(H):
         for x in range(W):
             out[pad + y, pad + x] = np.max(tmp[y: y + K_size, x: x + K_size]) - \
-                np.min(tmp[y: y + K_size, x: x + K_size])
+                                    np.min(tmp[y: y + K_size, x: x + K_size])
 
     out = out[pad: pad + H, pad: pad + W].astype(np.uint8)
 
@@ -43,12 +45,12 @@ img = cv2.imread("../imori.jpg").astype(np.float)
 
 # grayscale
 gray = BGR2GRAY(img)
-
+# gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 # Max-Min filtering
 out = max_min_filter(gray, K_size=3)
 
 # Save result
-cv2.imwrite("out.jpg", out)
+# cv2.imwrite("out.jpg", out)
 cv2.imshow("result", out)
 cv2.waitKey(0)
 cv2.destroyAllWindows()

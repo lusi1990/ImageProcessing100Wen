@@ -26,7 +26,7 @@ cv2.rectangle(out, pt1=(i, j), pt2=(i+Wt, j+Ht), color=(0,0,255), thickness=1)
 out = out.astype(np.uint8)
                 
 # Save result
-cv2.imwrite("out.jpg", out)
+#cv2.imwrite("out.jpg", out)
 cv2.imshow("result", out)
 cv2.waitKey(0)
 cv2.destroyAllWindows()

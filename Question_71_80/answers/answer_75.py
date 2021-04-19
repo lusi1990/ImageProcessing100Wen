@@ -75,7 +75,7 @@ gray = BGR2GRAY(img)
 pyramid = make_pyramid(gray)
 
 for i in range(6):
-    cv2.imwrite("out_{}.jpg".format(2**i), pyramid[i].astype(np.uint8))
+    # cv2.imwrite("out_{}.jpg".format(2**i), pyramid[i].astype(np.uint8))
     plt.subplot(1, 6, i+1)
     plt.imshow(pyramid[i], cmap='gray')
     plt.axis('off')

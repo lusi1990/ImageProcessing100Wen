@@ -214,7 +214,7 @@ edge = Canny(img)
 out = edge.astype(np.uint8)
 
 # Save result
-cv2.imwrite("out.jpg", out)
+#cv2.imwrite("out.jpg", out)
 cv2.imshow("result", out)
 cv2.waitKey(0)
 cv2.destroyAllWindows()

@@ -63,7 +63,7 @@ for i in range(Dil_time):
 out = np.abs(erode - dilate) * 255
                 
 # Save result
-cv2.imwrite("out.jpg", out)
+#cv2.imwrite("out.jpg", out)
 cv2.imshow("result", out)
 cv2.waitKey(0)
 cv2.destroyAllWindows()

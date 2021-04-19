@@ -58,5 +58,5 @@ for i, A in enumerate(As):
     plt.axis('off')
     plt.title("Angle "+str(A))
 
-plt.savefig("out.png")
+# plt.savefig("out.png")
 plt.show()

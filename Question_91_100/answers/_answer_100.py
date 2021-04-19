@@ -344,3 +344,4 @@ for g in GT:
 cv2.imwrite("out.jpg", img2)
 cv2.imshow("result", img2)
 cv2.waitKey(0)
+cv2.destroyAllWindows()

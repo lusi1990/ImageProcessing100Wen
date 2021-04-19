@@ -10,29 +10,30 @@ channel = 3
 
 # BGR -> Y Cb Cr
 def BGR2YCbCr(img):
-  H, W, _ = img.shape
+    H, W, _ = img.shape
 
-  ycbcr = np.zeros([H, W, 3], dtype=np.float32)
+    ycbcr = np.zeros([H, W, 3], dtype=np.float32)
 
-  ycbcr[..., 0] = 0.2990 * img[..., 2] + 0.5870 * img[..., 1] + 0.1140 * img[..., 0]
-  ycbcr[..., 1] = -0.1687 * img[..., 2] - 0.3313 * img[..., 1] + 0.5 * img[..., 0] + 128.
-  ycbcr[..., 2] = 0.5 * img[..., 2] - 0.4187 * img[..., 1] - 0.0813 * img[..., 0] + 128.
+    ycbcr[..., 0] = 0.2990 * img[..., 2] + 0.5870 * img[..., 1] + 0.1140 * img[..., 0]
+    ycbcr[..., 1] = -0.1687 * img[..., 2] - 0.3313 * img[..., 1] + 0.5 * img[..., 0] + 128.
+    ycbcr[..., 2] = 0.5 * img[..., 2] - 0.4187 * img[..., 1] - 0.0813 * img[..., 0] + 128.
 
-  return ycbcr
+    return ycbcr
+
 
 # Y Cb Cr -> BGR
 def YCbCr2BGR(ycbcr):
-  H, W, _ = ycbcr.shape
+    H, W, _ = ycbcr.shape
 
-  out = np.zeros([H, W, channel], dtype=np.float32)
-  out[..., 2] = ycbcr[..., 0] + (ycbcr[..., 2] - 128.) * 1.4020
-  out[..., 1] = ycbcr[..., 0] - (ycbcr[..., 1] - 128.) * 0.3441 - (ycbcr[..., 2] - 128.) * 0.7139
-  out[..., 0] = ycbcr[..., 0] + (ycbcr[..., 1] - 128.) * 1.7718
+    out = np.zeros([H, W, channel], dtype=np.float32)
+    out[..., 2] = ycbcr[..., 0] + (ycbcr[..., 2] - 128.) * 1.4020
+    out[..., 1] = ycbcr[..., 0] - (ycbcr[..., 1] - 128.) * 0.3441 - (ycbcr[..., 2] - 128.) * 0.7139
+    out[..., 0] = ycbcr[..., 0] + (ycbcr[..., 1] - 128.) * 1.7718
 
-  out = np.clip(out, 0, 255)
-  out = out.astype(np.uint8)
+    out = np.clip(out, 0, 255)
+    out = out.astype(np.uint8)
 
-  return out
+    return out
 
 
 # DCT weight
@@ -44,7 +45,8 @@ def DCT_w(x, y, u, v):
     if v == 0:
         cv /= np.sqrt(2)
     theta = np.pi / (2 * T)
-    return (( 2 * cu * cv / T) * np.cos((2*x+1)*u*theta) * np.cos((2*y+1)*v*theta))
+    return ((2 * cu * cv / T) * np.cos((2 * x + 1) * u * theta) * np.cos((2 * y + 1) * v * theta))
+
 
 # DCT
 def dct(img):
@@ -59,7 +61,7 @@ def dct(img):
                     for u in range(T):
                         for y in range(T):
                             for x in range(T):
-                                F[v+yi, u+xi, c] += img[y+yi, x+xi, c] * DCT_w(x,y,u,v)
+                                F[v + yi, u + xi, c] += img[y + yi, x + xi, c] * DCT_w(x, y, u, v)
 
     return F
 
@@ -77,30 +79,31 @@ def idct(F):
                     for x in range(T):
                         for v in range(K):
                             for u in range(K):
-                                out[y+yi, x+xi, c] += F[v+yi, u+xi, c] * DCT_w(x,y,u,v)
+                                out[y + yi, x + xi, c] += F[v + yi, u + xi, c] * DCT_w(x, y, u, v)
 
     out = np.clip(out, 0, 255)
     out = np.round(out).astype(np.uint8)
 
     return out
 
+
 # Quantization
 def quantization(F):
     H, W, _ = F.shape
 
     Q = np.array(((16, 11, 10, 16, 24, 40, 51, 61),
-                (12, 12, 14, 19, 26, 58, 60, 55),
-                (14, 13, 16, 24, 40, 57, 69, 56),
-                (14, 17, 22, 29, 51, 87, 80, 62),
-                (18, 22, 37, 56, 68, 109, 103, 77),
-                (24, 35, 55, 64, 81, 104, 113, 92),
-                (49, 64, 78, 87, 103, 121, 120, 101),
-                (72, 92, 95, 98, 112, 100, 103, 99)), dtype=np.float32)
+                  (12, 12, 14, 19, 26, 58, 60, 55),
+                  (14, 13, 16, 24, 40, 57, 69, 56),
+                  (14, 17, 22, 29, 51, 87, 80, 62),
+                  (18, 22, 37, 56, 68, 109, 103, 77),
+                  (24, 35, 55, 64, 81, 104, 113, 92),
+                  (49, 64, 78, 87, 103, 121, 120, 101),
+                  (72, 92, 95, 98, 112, 100, 103, 99)), dtype=np.float32)
 
     for ys in range(0, H, T):
         for xs in range(0, W, T):
             for c in range(channel):
-                F[ys: ys + T, xs: xs + T, c] =  np.round(F[ys: ys + T, xs: xs + T, c] / Q) * Q
+                F[ys: ys + T, xs: xs + T, c] = np.round(F[ys: ys + T, xs: xs + T, c] / Q) * Q
 
     return F
 
@@ -131,9 +134,11 @@ def MSE(img1, img2):
     mse = np.sum((img1 - img2) ** 2) / (H * W * channel)
     return mse
 
+
 # PSNR
 def PSNR(mse, vmax=255):
     return 10 * np.log10(vmax * vmax / mse)
+
 
 # bitrate
 def BITRATE():
@@ -162,4 +167,5 @@ print("bitrate:", bitrate)
 # Save result
 cv2.imshow("result", out)
 cv2.waitKey(0)
-cv2.imwrite("out.jpg", out)
+cv2.destroyAllWindows()
+# cv2.imwrite("out.jpg", out)

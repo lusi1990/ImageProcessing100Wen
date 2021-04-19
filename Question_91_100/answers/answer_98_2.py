@@ -16,7 +16,7 @@ def HOG(img):
 
         # padding before grad
         gray = np.pad(gray, (1, 1), 'edge')
-
+        np.eye(4)
         # get grad x
         gx = gray[1:H+1, 2:] - gray[1:H+1, :W]
         # get grad y
@@ -380,6 +380,6 @@ img2 = cv2.imread("imori_many.jpg")
 out = sliding_window(img2, nn)
 
 
-cv2.imwrite("out.jpg", out)
+#cv2.imwrite("out.jpg", out)
 cv2.imshow("result", out)
 cv2.waitKey(0)

@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 
+
 # Gray scale
 
 
@@ -15,9 +16,8 @@ def BGR2GRAY(img):
 
     return out
 
+
 # binalization
-
-
 def binarization(img, th=128):
     img[img < th] = 0
     img[img >= th] = 255
@@ -34,7 +34,7 @@ out = BGR2GRAY(img)
 out = binarization(out)
 
 # Save result
-cv2.imwrite("out.jpg", out)
+#cv2.imwrite("out.jpg", out)
 cv2.imshow("result", out)
 cv2.waitKey(0)
 cv2.destroyAllWindows()

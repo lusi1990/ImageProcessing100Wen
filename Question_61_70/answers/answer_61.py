@@ -52,7 +52,7 @@ img = cv2.imread("renketsu.png").astype(np.float32)
 out = connect_4(img)
 
 # Save result
-cv2.imwrite("out.png", out)
+# cv2.imwrite("out.png", out)
 cv2.imshow("result", out)
 cv2.waitKey(0)
 cv2.destroyAllWindows()

@@ -43,10 +43,12 @@ def bl_interpolate(img, ax=1., ay=1.):
 # Read image
 img = cv2.imread("imori.jpg").astype(np.float)
 
-# Bilinear interpolation
+# Bilinear interpolations
 out = bl_interpolate(img, ax=1.5, ay=1.5)
+# out = bl_interpolate(img, ax=9, ay=9)
 
 # Save result
 cv2.imshow("result", out)
 cv2.waitKey(0)
-cv2.imwrite("out.jpg", out)
+cv2.destroyAllWindows()
+#cv2.imwrite("out.jpg", out)

@@ -17,7 +17,7 @@ img = cv2.imread("imori.jpg")
 # Dicrease color
 out = dicrease_color(img)
 
-cv2.imwrite("out.jpg", out)
+#cv2.imwrite("out.jpg", out)
 cv2.imshow("result", out)
 cv2.waitKey(0)
 cv2.destroyAllWindows()

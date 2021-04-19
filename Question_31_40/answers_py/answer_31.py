@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 # Affine
 def affine(img, dx=30, dy=30):
     # get shape
@@ -16,10 +17,10 @@ def affine(img, dx=30, dy=30):
     ty = 0.
 
     # prepare temporary
-    _img = np.zeros((H+2, W+2, C), dtype=np.float32)
+    _img = np.zeros((H + 2, W + 2, C), dtype=np.float32)
 
     # insert image to center of temporary
-    _img[1:H+1, 1:W+1] = img
+    _img[1:H + 1, 1:W + 1] = img
 
     # prepare affine image temporary
     H_new = np.ceil(dy + H).astype(np.int)
@@ -32,11 +33,11 @@ def affine(img, dx=30, dy=30):
 
     # prepare inverse matrix for affine
     adbc = a * d - b * c
-    x = np.round((d * x_new  - b * y_new) / adbc).astype(np.int) - tx + 1
+    x = np.round((d * x_new - b * y_new) / adbc).astype(np.int) - tx + 1
     y = np.round((-c * x_new + a * y_new) / adbc).astype(np.int) - ty + 1
 
-    x = np.minimum(np.maximum(x, 0), W+1).astype(np.int)
-    y = np.minimum(np.maximum(y, 0), H+1).astype(np.int)
+    x = np.minimum(np.maximum(x, 0), W + 1).astype(np.int)
+    y = np.minimum(np.maximum(y, 0), H + 1).astype(np.int)
 
     # assign value from original to affine image
     out[y_new, x_new] = _img[y, x]
@@ -54,4 +55,5 @@ out = affine(img, dx=30, dy=30)
 # Save result
 cv2.imshow("result", out)
 cv2.waitKey(0)
-cv2.imwrite("out.jpg", out)
+# cv2.imwrite("out.jpg", out)
+cv2.destroyAllWindows()

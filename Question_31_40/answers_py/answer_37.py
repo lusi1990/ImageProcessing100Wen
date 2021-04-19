@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 # DCT hyoer-parameter
 T = 8
-K = 4
+K = 8
 channel = 3
 
 # DCT weight
@@ -97,4 +97,5 @@ print("bitrate:", bitrate)
 # Save result
 cv2.imshow("result", out)
 cv2.waitKey(0)
-cv2.imwrite("out.jpg", out)
+cv2.destroyAllWindows()
+#cv2.imwrite("out.jpg", out)

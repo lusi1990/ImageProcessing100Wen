@@ -91,6 +91,6 @@ img = cv2.imread("thorino.jpg").astype(np.float32)
 # Hessian corner detection
 out = Hessian_corner(img)
 
-cv2.imwrite("out.jpg", out)
+#cv2.imwrite("out.jpg", out)
 cv2.imshow("result", out)
 cv2.waitKey(0)

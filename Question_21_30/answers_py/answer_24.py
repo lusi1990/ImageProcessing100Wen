@@ -24,4 +24,5 @@ out = gamma_correction(img)
 # Save result
 cv2.imshow("result", out)
 cv2.waitKey(0)
-cv2.imwrite("out.jpg", out)
+#cv2.imwrite("out.jpg", out)
+cv2.destroyAllWindows()

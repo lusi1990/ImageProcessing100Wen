@@ -63,14 +63,14 @@ out_v, out_h = prewitt_filter(gray, K_size=3)
 
 
 # Save result
-cv2.imwrite("out_v.jpg", out_v)
+# cv2.imwrite("out_v.jpg", out_v)
 cv2.imshow("result_v", out_v)
 while cv2.waitKey(100) != 27:# loop if not get ESC
     if cv2.getWindowProperty('result_v',cv2.WND_PROP_VISIBLE) <= 0:
         break
 cv2.destroyWindow('result_v')
 
-cv2.imwrite("out_h.jpg", out_h)
+# cv2.imwrite("out_h.jpg", out_h)
 cv2.imshow("result_h", out_h)
 # loop if not get ESC or click x
 while cv2.waitKey(100) != 27:

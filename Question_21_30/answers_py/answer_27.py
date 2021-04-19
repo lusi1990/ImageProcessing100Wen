@@ -80,4 +80,5 @@ out = bc_interpolate(img, ax=1.5, ay=1.5)
 # Save result
 cv2.imshow("result", out)
 cv2.waitKey(0)
-cv2.imwrite("out.jpg", out)
+cv2.destroyAllWindows()
+#cv2.imwrite("out.jpg", out)

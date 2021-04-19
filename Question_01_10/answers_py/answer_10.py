@@ -33,7 +33,7 @@ out = median_filter(img, K_size=3)
 
 
 # Save result
-cv2.imwrite("out.jpg", out)
+#cv2.imwrite("out.jpg", out)
 cv2.imshow("result", out)
 cv2.waitKey(0)
 cv2.destroyAllWindows()

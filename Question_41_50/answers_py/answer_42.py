@@ -180,9 +180,9 @@ edge = edge.astype(np.uint8)
 angle = angle.astype(np.uint8)
 
 # Save result
-cv2.imwrite("out.jpg", edge)
+# cv2.imwrite("out.jpg", edge)
 cv2.imshow("result", edge)
-cv2.imwrite("out2.jpg", angle)
+# cv2.imwrite("out2.jpg", angle)
 cv2.imshow("result2", angle)
 cv2.waitKey(0)
 cv2.destroyAllWindows()

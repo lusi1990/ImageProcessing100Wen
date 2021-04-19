@@ -64,6 +64,6 @@ img = cv2.imread("imori.jpg").astype(np.float32)
 # K-means
 out = k_means(img)
 
-cv2.imwrite("out.jpg", out)
+#cv2.imwrite("out.jpg", out)
 cv2.imshow("result", out)
 cv2.waitKey(0)
