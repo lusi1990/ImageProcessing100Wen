@@ -21,10 +21,14 @@ def BGR2RGB(img):
 img = cv2.imread("../imori.jpg")
 
 # BGR -> RGB
-img = BGR2RGB(img)
+img_rgb = BGR2RGB(img)
+print('use BGR2RGB')
+cv2.imshow("result", img_rgb)
+cv2.waitKey(0)
 
-# Save result
-# cv2.imwrite("out.jpg", img)
-cv2.imshow("result", img)
+print('use opencv')
+img = cv2.imread("../imori.jpg")
+im_rgb2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+cv2.imshow("result", im_rgb2)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
