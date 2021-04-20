@@ -1,5 +1,5 @@
 """
-todo install
+todo install,基础操作 等
 OpenCV is BGR, Pillow is RGB
 
 When reading a color image file, OpenCV imread() reads as a NumPy array ndarray of row (height) x column (width) x color (3).
